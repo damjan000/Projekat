@@ -22,10 +22,10 @@ def create_table(conn, create_table_sql):
 
 def insert_parking(conn, parking):
     try:
-        sql = ''' INSERT INTO parking(grad,ulica,zona,broj_mjesta)
-                  VALUES(?,?,?,?) '''
+        sql = ''' INSERT INTO parking(broj_parkinga,grad,ulica,zona,broj_mjesta)
+                  VALUES(?,?,?,?,?) '''
         cur = conn.cursor()
-        params = (parking.grad,parking.ulica,parking.zona,parking.br_mjesta)
+        params = (parking.jed_br_parkinga,parking.grad,parking.ulica,parking.zona,parking.br_mjesta)
         cur.execute(sql, params)
         conn.commit()
     except Error as e:
@@ -52,3 +52,31 @@ def insert_vlasnik(conn, vlasnik):
         conn.commit()
     except Error as e:
         print(e)
+
+def delete_parking(conn,br_parkinga):
+    try:
+        sql='''DELETE FROM parking WHERE broj_parkinga="'''+str(br_parkinga)+'''";'''
+        cur=conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+    except Error as e:
+        print(e)
+
+def delete_vlasnik(conn,jmbg):
+    try:
+        sql='''DELETE FROM vlasnik WHERE jmbg="'''+str(jmbg)+'''";'''
+        cur=conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+    except Error as e:
+        print(e)
+
+def delete_automobil(conn,reg_oznaka):
+    try:
+        sql='''DELETE FROM automobil WHERE registarske_oznake="'''+str(reg_oznaka)+'''";'''
+        cur=conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+    except Error as e:
+        print(e)
+

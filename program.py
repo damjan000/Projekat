@@ -6,6 +6,7 @@ import sqlite3
 
 conn=baza.create_connection("database.db")
 sql_create_parking_table = """ CREATE TABLE IF NOT EXISTS parking (
+                            broj_parkinga INTEGER,
                             grad VARCHAR(20),
                             ulica VARCHAR(30),
                             zona INTEGER,
@@ -32,7 +33,8 @@ if conn is not None:
     while True:
         izbor=int(input("Za kraj programa unesite 0,\n"
                         "za unos parkinga 1,\n"
-                        "za unos vlasnika i automobila 2,\n"
+                        "za unos vlasnika 2,\n"
+                        "za unos automobila 3,\n"
                         "za brisanje parkinga 4,\n"
                         "za brisanje vlasnika 5,\n"
                         "za brisanje automobila 6,\n"
@@ -41,16 +43,37 @@ if conn is not None:
         if izbor==0:
             break
         elif izbor==1:
+            br_parkinga=int(input("Unesite jedinstveni broj parkinga: "))
             grad=input("Unesite grad gdje je parking: ")
             ulica=input("Unesite ulicu parkinga: ")
             zona=int(input("Unesite zonu parkinga: "))
             br_mjesta=int(input("Unesite broj mjesta parkinga: "))
-            parking=parking.Parking(grad,ulica,zona,br_mjesta)
-            baza.insert_parking(conn,parking)
+            parking1=parking.Parking(br_parkinga,grad,ulica,zona,br_mjesta)
+            print(parking1)
+            baza.insert_parking(conn,parking1)
         elif izbor==2:
             ime=input("Unesite ime vlasnika: ")
             prezime=input("Unesite prezime vlasnika: ")
             pol=input("Unesite pol vlasnika (m/z): ")
             jmbg=int(input("Unesite maticni broj: "))
-            vlasnik=vlasnik.Vlasnik(ime,prezime,pol,jmbg)
-            baza.insert_vlasnik(conn,vlasnik)
+            vlasnik1=vlasnik.Vlasnik(ime,prezime,pol,jmbg)
+            print(vlasnik1)
+            baza.insert_vlasnik(conn,vlasnik1)
+        elif izbor==3:
+            marka=input("Unesite marku automobila: ")
+            model=input("Unesi model automobila: ")
+            br_sjedista=int(input("Unesite broj sjedista: "))
+            boja=input("Unesite boja automobila: ")
+            reg_oznake=input("Unesite rigistarske oznake automobila: ")
+            automobil1=automobil.Automobil(marka,model,br_sjedista,boja,reg_oznake)
+            print(automobil1)
+            baza.insert_automobil(conn,automobil1)
+        elif izbor==4:
+            broj_parkinga=int(input("Unesite broj parkinga: "))
+            baza.delete_parking(conn,broj_parkinga)
+        elif izbor==5:
+            jmbg=int(input("Unesite jmbg vlasnika: "))
+            baza.delete_vlasnik(conn,jmbg)
+        elif izbor==6:
+            reg_oznake=input("Unesite registarske oznake: ")
+            baza.delete_automobil(conn,reg_oznake)
