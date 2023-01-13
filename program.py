@@ -32,12 +32,18 @@ if conn is not None:
 
     while True:
         izbor=int(input("Za kraj programa unesite 0,\n"
-                        "za unos parkinga 1,\n"
-                        "za unos vlasnika 2,\n"
-                        "za unos automobila 3,\n"
+                        "za kreiranje parkinga 1,\n"
+                        "za kreiranje vlasnika 2,\n"
+                        "za kreiranje automobila 3,\n"
                         "za brisanje parkinga 4,\n"
                         "za brisanje vlasnika 5,\n"
                         "za brisanje automobila 6,\n"
+                        "za ispis svih parkinga 7,\n"
+                        "za ispis svih vlasnika 8,\n"
+                        "za ispis svih automobila 9,\n"
+                        "za promjenu broja mjesta na parkingu 10,\n"
+                        "za projemenu imena vlasnika 11,\n"
+                        "za promjenu boje automobila 12,\n"
                         "Unesite izbor: "
                         ""))
         if izbor==0:
@@ -77,3 +83,27 @@ if conn is not None:
         elif izbor==6:
             reg_oznake=input("Unesite registarske oznake: ")
             baza.delete_automobil(conn,reg_oznake)
+        elif izbor==7:
+            sel=baza.select_all_parking(conn)
+            for i in sel:
+                print(i)
+        elif izbor==8:
+            sel=baza.select_all_vlasnik(conn)
+            for i in sel:
+                print(i)
+        elif izbor==9:
+            sel=baza.select_all_automobil(conn)
+            for i in sel:
+                print(i)
+        elif izbor==10:
+            broj_parkinga=int(input("Unesite broj parkinga: "))
+            br_mjesta=int(input("Unesite novi broj mjesta: "))
+            baza.update_parking(conn,broj_parkinga,br_mjesta)
+        elif izbor==11:
+            jmbg=int(input("Uneisite jedinstvani maticni broj: "))
+            ime=input("Unesite novo ime: ")
+            baza.update_vlasnik(conn,jmbg,ime)
+        elif izbor==12:
+            reg_oznake=input("Unesite registarske oznake: ")
+            boja=input("Unesite novu boju: ")
+            baza.update_automobil(conn,reg_oznake,boja)

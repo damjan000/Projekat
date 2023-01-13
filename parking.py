@@ -7,6 +7,6 @@ class Parking():
         self.zona=zona
         self.br_mjesta=broj_mjesta
     def __str__(self):
-        return "Parking "+str(self.jed_br_parkinga)+" u gradu: "+self.grad+", "+self.ulica+" je "+str(self.zona)+" zona i ima "+str(self.br_mjesta)+" mjesta."
+        return "Parking "+str(self.jed_br_parkinga)+" u gradu: "+self.grad+",ulica: "+self.ulica+" je "+str(self.zona)+" zona i ima "+str(self.br_mjesta)+" mjesta."
 
 

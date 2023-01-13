@@ -80,3 +80,36 @@ def delete_automobil(conn,reg_oznaka):
     except Error as e:
         print(e)
 
+def select_all_parking(conn):
+    sql = ''' SELECT * FROM parking;'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    ans = cur.fetchall()
+    return ans
+def select_all_vlasnik(conn):
+    sql = ''' SELECT * FROM vlasnik;'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    ans = cur.fetchall()
+    return ans
+def select_all_automobil(conn):
+    sql = ''' SELECT * FROM automobil;'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    ans = cur.fetchall()
+    return ans
+def update_parking(conn,broj_parkinga,broj_mjesta):
+    sql='''UPDATE parking SET broj_mjesta="'''+str(broj_mjesta)+'''" WHERE broj_parkinga="'''+str(broj_parkinga)+'''";'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+def update_vlasnik(conn,jmbg,ime):
+    sql='''UPDATE vlasnik SET ime="'''+ime+'''" WHERE jmbg="'''+str(jmbg)+'''";'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+def update_automobil(conn,reg_oznake,boja):
+    sql='''UPDATE automobil SET boja="'''+str(boja)+'''" WHERE registarske_oznake="'''+str(reg_oznake)+'''";'''
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
